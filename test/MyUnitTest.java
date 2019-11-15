@@ -113,7 +113,8 @@ public class MyUnitTest {
         Volvo240 myCar = new Volvo240();
         myCar.startEngine();
         myCar.move();
-        assertEquals(0.1, myCar.getY(), 0000001);
+        assertEquals(myCar.point.getX(), 0.1, 0000001);
+        assertEquals(myCar.point.getY(), 0.1, 0000001);
     }
 
     @Test
@@ -122,7 +123,8 @@ public class MyUnitTest {
         Volvo240 myCar = new Volvo240();
         myCar.startEngine();
         myCar.turnLeft();
-        assertEquals(0.1, myCar.getY(), 0000001);
+        assertEquals(myCar.point.getX(), 0.1, 0000001);
+        assertEquals(myCar.point.getY(), 0.1, 0000001);
     }
 
     @Test
@@ -131,7 +133,8 @@ public class MyUnitTest {
         Volvo240 myCar = new Volvo240();
         myCar.startEngine();
         myCar.turnRight();
-        assertEquals(0.1, myCar.getY(), 0000001);
+        assertEquals(myCar.point.getX(), 0.1, 0000001);
+        assertEquals(myCar.point.getY(), 0.1, 0000001);
     }
 
     @Test
@@ -140,7 +143,8 @@ public class MyUnitTest {
         Saab95 myCar = new Saab95();
         myCar.startEngine();
         myCar.move();
-        assertEquals(0.1, myCar.getY(), 0000001);
+        assertEquals(myCar.point.getX(), 0.1, 0000001);
+        assertEquals(myCar.point.getY(), 0.1, 0000001);
     }
 
     @Test
@@ -149,7 +153,8 @@ public class MyUnitTest {
         Saab95 myCar = new Saab95();
         myCar.startEngine();
         myCar.turnLeft();
-        assertEquals(0.1, myCar.getY(), 0000001);
+        assertEquals(myCar.point.getX(), 0.1, 0000001);
+        assertEquals(myCar.point.getY(), 0.1, 0000001);
     }
 
     @Test
@@ -158,7 +163,8 @@ public class MyUnitTest {
         Saab95 myCar = new Saab95();
         myCar.startEngine();
         myCar.turnRight();
-        assertEquals(0.1, myCar.getY(), 0000001);
+        assertEquals(myCar.point.getX(), 0.1, 0000001);
+        assertEquals(myCar.point.getY(), 0.1, 0000001);
     }
 
 }

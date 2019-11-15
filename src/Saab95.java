@@ -1,5 +1,10 @@
 import java.awt.*;
+import java.awt.geom.Point2D;
 
+/**
+ * Saab is a class that extends the superclass car.
+ * It has a unique speedFactor method
+ */
 public class Saab95 extends Car {
 
     public Saab95() {
@@ -9,11 +14,10 @@ public class Saab95 extends Car {
         turboOn = false;
         modelName = "Saab95";
         stopEngine();
-        y = 0;
-        x = 0;
+        point = new Point2D.Double(0, 0);
     }
 
-
+    @Override
     public double speedFactor() {
         double turbo = 1;
         if (turboOn) turbo = 1.3;
@@ -26,16 +30,6 @@ public class Saab95 extends Car {
 
     public Boolean turnTurboOff() {
         return turboOn = false;
-    }
-
-    @Override
-    public void incrementSpeed(double amount) {
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
-    }
-
-    @Override
-    public void decrementSpeed(double amount) {
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
 
 

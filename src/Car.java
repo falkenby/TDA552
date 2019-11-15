@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.awt.geom.Point2D;
+
+import static java.lang.Math.*;
 
 /**
  * An abstract superclass Car that is extended by the carmodels Volvo240 and Saab95.
@@ -8,9 +11,7 @@ import java.awt.*;
 
 public abstract class Car implements Movable {
 
-    /**
-     * protected is used as to not have it be modified from the outside.
-     */
+    /* Used protected due to it being used in Volvo240 and Saab95*/
     protected double trimFactor; // How much the engine is trimmed
     protected boolean turboOn; // Turbo-switch
     protected int nrDoors; // Number of doors on the car
@@ -18,8 +19,11 @@ public abstract class Car implements Movable {
     protected double currentSpeed; // The current speed of the car
     protected Color color; // Color of the car
     protected String modelName; // The car model name
-    protected double x; // x position
-    protected double y; // y postition
+    protected Point2D.Double point; // Coordinate system in a 2D coordinate system
+    protected Point direction; // direction of the turning
+
+
+    /* Getters and Setters*/
 
     public int getNrDoors() {
         return nrDoors;
@@ -49,18 +53,35 @@ public abstract class Car implements Movable {
         currentSpeed = 0;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
+    public Point2D.Double getPoint() {
+        return point;
     }
 
 
-    public abstract void incrementSpeed(double amount);
+    /**
+     * Abstract method for speedFactor, because the speedFactor is unique for each car
+     */
+    public abstract double speedFactor();
 
-    public abstract void decrementSpeed(double amount);
+    /**
+     * Incrementing the speed, is called by gas()
+     */
+
+    public void incrementSpeed(double amount) {
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+    }
+
+    /**
+     * Decrementing the speed, is called by brake()
+     */
+
+    public void decrementSpeed(double amount) {
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
+    }
+
+    /**
+     * Slowing down the car, amount must be between 0 and 1
+     */
 
     public void brake(double amount) {
         if (amount < 0.0 || amount > 1.0) {
@@ -69,6 +90,10 @@ public abstract class Car implements Movable {
         decrementSpeed(amount);
 
     }
+
+    /**
+     * Speeding up the car, amount must be between 0 and 1
+     */
 
     public void gas(double amount) {
         if (amount < 0.0 || amount > 1.0) {
@@ -79,22 +104,48 @@ public abstract class Car implements Movable {
     }
 
 
+    /**
+     * Movable methods call, and multiplying by the current speed
+     */
 
-    /*Movable methods call*/
 
     @Override
     public void move() {
-        y += currentSpeed;
+
+        double newX = point.getX() + currentSpeed;
+        double newY = point.getY() + currentSpeed;
+
+        point.setLocation(newX, newY);
     }
 
+    /**
+     * Rotates the car 90 degrees to the right and multiplying by the current speed
+     */
     @Override
     public void turnRight() {
-        x += currentSpeed;
+
+        double turning = PI;
+
+        double newX = point.getX() * cos(turning) + currentSpeed;
+        double newY = point.getY() * sin(turning) + currentSpeed;
+
+        point.setLocation(newX, newY);
+
     }
 
+    /**
+     * Rotates the car 90 degrees to the left by "turning" 180 degrees and multiplying by the current speed
+     */
     @Override
     public void turnLeft() {
-        x = x + (-1 * currentSpeed);
+
+        double turning = 2 * PI;
+
+        double newX = point.getX() * cos(turning) + currentSpeed;
+        double newY = point.getX() * sin(turning) + currentSpeed;
+
+        point.setLocation(newX, newY);
+
     }
 
 

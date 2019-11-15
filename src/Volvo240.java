@@ -1,6 +1,10 @@
 import java.awt.*;
+import java.awt.geom.Point2D;
 
-
+/**
+ * Volvo240 is a class that extends the superclass car.
+ * It has a unique speedFactor method
+ */
 public class Volvo240 extends Car {
 
     public Volvo240() {
@@ -10,23 +14,12 @@ public class Volvo240 extends Car {
         modelName = "Volvo240";
         stopEngine();
         trimFactor = 1.25;
-        y = 0;
-        x = 0;
+        point = new Point2D.Double(0, 0);
     }
 
+    @Override
     public double speedFactor() {
         return enginePower * 0.01 * trimFactor;
     }
-
-    @Override
-    public void incrementSpeed(double amount) {
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
-    }
-
-    @Override
-    public void decrementSpeed(double amount) {
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
-    }
-
 
 }
