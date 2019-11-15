@@ -1,7 +1,16 @@
+import java.awt.*;
 
+/**
+ * An abstract superclass Car that is extended by the carmodels Volvo240 and Saab95.
+ * It also implements Movable, which is used to turn the car.
+ * It is an abstract class so that
+ */
 
-public class Car implements Movable {
+public abstract class Car implements Movable {
 
+    /**
+     * protected is used as to not have it be modified from the outside.
+     */
     protected double trimFactor; // How much the engine is trimmed
     protected boolean turboOn; // Turbo-switch
     protected int nrDoors; // Number of doors on the car
@@ -9,6 +18,8 @@ public class Car implements Movable {
     protected double currentSpeed; // The current speed of the car
     protected Color color; // Color of the car
     protected String modelName; // The car model name
+    protected double x; // x position
+    protected double y; // y postition
 
     public int getNrDoors() {
         return nrDoors;
@@ -38,26 +49,53 @@ public class Car implements Movable {
         currentSpeed = 0;
     }
 
-    public double speedFactor() {
-        return enginePower * 0.01 * trimFactor;
+    public double getX() {
+        return x;
     }
 
-    public void incrementSpeed(double amount) {
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+    public double getY() {
+        return y;
     }
 
-    public void decrementSpeed(double amount) {
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
-    }
 
-    // TODO fix this method according to lab pm
-    public void gas(double amount) {
-        incrementSpeed(amount);
-    }
+    public abstract void incrementSpeed(double amount);
 
-    // TODO fix this method according to lab pm
+    public abstract void decrementSpeed(double amount);
+
     public void brake(double amount) {
+        if (amount < 0.0 || amount > 1.0) {
+            throw new RuntimeException("The brake can't go above 1 nor below 0");
+        }
         decrementSpeed(amount);
+
     }
+
+    public void gas(double amount) {
+        if (amount < 0.0 || amount > 1.0) {
+            throw new RuntimeException("The gas can't go above 1 nor below 0");
+        }
+        incrementSpeed(amount);
+
+    }
+
+
+
+    /*Movable methods call*/
+
+    @Override
+    public void move() {
+        y += currentSpeed;
+    }
+
+    @Override
+    public void turnRight() {
+        x += currentSpeed;
+    }
+
+    @Override
+    public void turnLeft() {
+        x = x + (-1 * currentSpeed);
+    }
+
 
 }
