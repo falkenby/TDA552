@@ -21,9 +21,8 @@ public abstract class Car implements Movable {
     protected String modelName; // The car model name
     protected Point2D.Double point; // Coordinate system in a 2D coordinate system
     protected char direction; // direction of the turning
-    protected boolean isMoving; // boolean if the truck is moving or not
+    protected boolean ramp; // boolean if the truck is moving or not
     protected double truckAngle; // truck angle
-
 
 
     /* Getters and Setters*/
@@ -68,19 +67,37 @@ public abstract class Car implements Movable {
         return truckAngle;
     }
 
-    public boolean isTruckMoving() {
-        return isMoving;
+    public boolean isRampDown() {
+        return ramp;
     }
 
+    /**
+     * A method for raising the truckbed on Scania
+     *
+     * @param angle
+     */
     public void raiseTruckBed(double angle) {
-        if (isTruckMoving() == true || (this.truckAngle + angle) >70 || (this.truckAngle + angle) <0) {
+        if (this.currentSpeed > 0 || (this.truckAngle + angle) > 70 || (this.truckAngle + angle) < 0) {
             throw new RuntimeException("Cannot raise truckbed when truck is moving!");
         }
 
-        this.truckAngle = angle;
+        this.truckAngle += angle;
 
     }
 
+    /**
+     * A method for lowering the truckbed on Scania
+     *
+     * @param angle
+     */
+
+    public void lowerTruckBed(double angle) {
+        if (this.currentSpeed > 0 || (this.truckAngle - angle) > 70 || (this.truckAngle - angle) < 0) {
+            throw new RuntimeException("Cannot raise truckbed when truck is moving!");
+        }
+
+        this.truckAngle -= angle;
+    }
 
 
     /**
@@ -118,11 +135,15 @@ public abstract class Car implements Movable {
 
     /**
      * Speeding up the car, amount must be between 0 and 1
+     * Also catches if the truck has an truckangle of more than 0
      */
 
     public void gas(double amount) {
         if (amount < 0.0 || amount > 1.0) {
             throw new RuntimeException("The gas can't go above 1 nor below 0");
+        }
+        if (this.truckAngle > 0 || ramp == false) {
+            throw new RuntimeException("Cannot move the truck when the truckbed is not in the down position!");
         }
         incrementSpeed(amount);
 
@@ -130,7 +151,8 @@ public abstract class Car implements Movable {
 
 
     /**
-     * Movable methods call, and multiplying by the current speed
+     * Movable methods call, uses the Point2D system with a double x and a double y
+     * Changes speed depending on direction
      */
 
 
@@ -156,7 +178,7 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Rotates the car 90 degrees to the right and multiplying by the current speed
+     * Rotates the car 90 degrees to the right
      */
     @Override
     public void turnRight() {
@@ -181,7 +203,7 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Rotates the car 90 degrees to the left by "turning" 180 degrees and multiplying by the current speed
+     * Rotates the car 90 degrees to the left
      */
     @Override
     public void turnLeft() {

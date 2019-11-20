@@ -1,17 +1,17 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class Scania extends Car {
+public class CarTruck extends Car{
 
-    public Scania() {
+    public CarTruck() {
         nrDoors = 2;
-        color = Color.blue;
-        enginePower = 0.8;
-        modelName = "Scania";
+        color = Color.green;
+        enginePower = 0.9;
+        modelName = "CarTruck";
         stopEngine();
         point = new Point2D.Double(0, 0);
         direction = 'N';
-        truckAngle = 0;
+        ramp = true;
 
     }
 
@@ -19,5 +19,4 @@ public class Scania extends Car {
     public double speedFactor() {
         return enginePower;
     }
-
 }
