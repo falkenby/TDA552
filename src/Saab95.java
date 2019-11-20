@@ -15,6 +15,7 @@ public class Saab95 extends Car {
         modelName = "Saab95";
         stopEngine();
         point = new Point2D.Double(0, 0);
+        direction = 'N';
     }
 
     @Override

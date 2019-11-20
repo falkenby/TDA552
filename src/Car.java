@@ -20,7 +20,10 @@ public abstract class Car implements Movable {
     protected Color color; // Color of the car
     protected String modelName; // The car model name
     protected Point2D.Double point; // Coordinate system in a 2D coordinate system
-    protected Point direction; // direction of the turning
+    protected char direction; // direction of the turning
+    protected boolean isMoving; // boolean if the truck is moving or not
+    protected double truckAngle; // truck angle
+
 
 
     /* Getters and Setters*/
@@ -54,8 +57,30 @@ public abstract class Car implements Movable {
     }
 
     public Point2D.Double getPoint() {
-        return point;
+        return this.point;
     }
+
+    public char getDirection() {
+        return this.direction;
+    }
+
+    public double getAngle() {
+        return truckAngle;
+    }
+
+    public boolean isTruckMoving() {
+        return isMoving;
+    }
+
+    public void raiseTruckBed(double angle) {
+        if (isTruckMoving() == true || (this.truckAngle + angle) >70 || (this.truckAngle + angle) <0) {
+            throw new RuntimeException("Cannot raise truckbed when truck is moving!");
+        }
+
+        this.truckAngle = angle;
+
+    }
+
 
 
     /**
@@ -112,10 +137,22 @@ public abstract class Car implements Movable {
     @Override
     public void move() {
 
-        double newX = point.getX() + currentSpeed;
-        double newY = point.getY() + currentSpeed;
+        switch (this.direction) {
+            case 'N':
+                this.point.setLocation(this.point.getX(), (this.point.getY() + this.currentSpeed));
+                break;
+            case 'W':
+                this.point.setLocation((this.point.getX() + this.currentSpeed), this.point.getY());
+                break;
+            case 'E':
+                this.point.setLocation((this.point.getX() - this.currentSpeed), this.point.getY());
+                break;
+            case 'S':
+                point.setLocation(point.getX(), (point.getY() - currentSpeed));
+                break;
 
-        point.setLocation(newX, newY);
+        }
+
     }
 
     /**
@@ -124,12 +161,22 @@ public abstract class Car implements Movable {
     @Override
     public void turnRight() {
 
-        double turning = PI;
+        switch (this.direction) {
+            case 'N':
+                this.direction = 'E';
+                break;
+            case 'W':
+                this.direction = 'N';
+                break;
+            case 'E':
+                this.direction = 'S';
+                break;
+            case 'S':
+                this.direction = 'W';
+                break;
 
-        double newX = point.getX() * cos(turning) + currentSpeed;
-        double newY = point.getY() * sin(turning) + currentSpeed;
+        }
 
-        point.setLocation(newX, newY);
 
     }
 
@@ -139,14 +186,22 @@ public abstract class Car implements Movable {
     @Override
     public void turnLeft() {
 
-        double turning = 2 * PI;
+        switch (this.direction) {
+            case 'N':
+                this.direction = 'W';
+                break;
+            case 'W':
+                this.direction = 'S';
+                break;
+            case 'E':
+                this.direction = 'N';
+                break;
+            case 'S':
+                this.direction = 'E';
+                break;
 
-        double newX = point.getX() * cos(turning) + currentSpeed;
-        double newY = point.getX() * sin(turning) + currentSpeed;
-
-        point.setLocation(newX, newY);
+        }
 
     }
-
 
 }
