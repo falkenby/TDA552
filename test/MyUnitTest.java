@@ -113,8 +113,9 @@ public class MyUnitTest {
         Volvo240 myCar = new Volvo240();
         myCar.startEngine();
         myCar.move();
-        assertEquals(myCar.point.getX(), 0.1, 0000001);
-        assertEquals(myCar.point.getY(), 0.1, 0000001);
+        assertEquals(myCar.getDirection(), 'N');
+        assertEquals(myCar.point.getX(), 0, 00001);
+        assertEquals(myCar.point.getX(), 1, 00001);
     }
 
     @Test
@@ -123,8 +124,7 @@ public class MyUnitTest {
         Volvo240 myCar = new Volvo240();
         myCar.startEngine();
         myCar.turnLeft();
-        assertEquals(myCar.point.getX(), 0.1, 0000001);
-        assertEquals(myCar.point.getY(), 0.1, 0000001);
+        assertEquals(myCar.getDirection(), 'W');
     }
 
     @Test
@@ -133,8 +133,7 @@ public class MyUnitTest {
         Volvo240 myCar = new Volvo240();
         myCar.startEngine();
         myCar.turnRight();
-        assertEquals(myCar.point.getX(), 0.1, 0000001);
-        assertEquals(myCar.point.getY(), 0.1, 0000001);
+        assertEquals(myCar.getDirection(), 'E');
     }
 
     @Test
@@ -143,8 +142,9 @@ public class MyUnitTest {
         Saab95 myCar = new Saab95();
         myCar.startEngine();
         myCar.move();
-        assertEquals(myCar.point.getX(), 0.1, 0000001);
-        assertEquals(myCar.point.getY(), 0.1, 0000001);
+        assertEquals(myCar.getDirection(), 'N');
+        assertEquals(myCar.point.getX(), 0, 00001);
+        assertEquals(myCar.point.getX(), 1, 00001);
     }
 
     @Test
@@ -153,8 +153,7 @@ public class MyUnitTest {
         Saab95 myCar = new Saab95();
         myCar.startEngine();
         myCar.turnLeft();
-        assertEquals(myCar.point.getX(), 0.1, 0000001);
-        assertEquals(myCar.point.getY(), 0.1, 0000001);
+        assertEquals(myCar.getDirection(), 'W');
     }
 
     @Test
@@ -163,8 +162,7 @@ public class MyUnitTest {
         Saab95 myCar = new Saab95();
         myCar.startEngine();
         myCar.turnRight();
-        assertEquals(myCar.point.getX(), 0.1, 0000001);
-        assertEquals(myCar.point.getY(), 0.1, 0000001);
+        assertEquals(myCar.getDirection(), 'E');
     }
 
 }
