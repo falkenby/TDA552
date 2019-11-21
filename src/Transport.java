@@ -85,8 +85,8 @@ public abstract class Transport implements Movable {
     }
 
     /**
-     * Speeding up the car, amount must be between 0 and 1
-     * Also catches if the truck has an truckangle of more than 0
+     * Speeding up the car, amount must be between 0 and 1.
+     * This method is abstract because it changes a little in car and truck
      */
 
     public abstract void gas(double amount);

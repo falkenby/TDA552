@@ -9,33 +9,26 @@ public abstract class Truck extends Transport {
     }
 
     /**
-     * A method for raising the truckbed on Scania
+     * A method for raising the truckbed
      *
      * @param angle
      */
-    public void raiseTruckBed(double angle) {
-        if (this.currentSpeed > 0 || (this.truckAngle + angle) > 70 || (this.truckAngle + angle) < 0) {
-            throw new RuntimeException("Cannot raise truckbed when truck is moving!");
-        }
-
-        this.truckAngle += angle;
-
-    }
+    public abstract void raiseTruckBed(double angle);
 
     /**
-     * A method for lowering the truckbed on Scania
+     * A method for lowering the truckbed
      *
      * @param angle
      */
 
-    public void lowerTruckBed(double angle) {
-        if (this.currentSpeed > 0 || (this.truckAngle - angle) > 70 || (this.truckAngle - angle) < 0) {
-            throw new RuntimeException("Cannot raise truckbed when truck is moving!");
-        }
+    public abstract void lowerTruckBed(double angle);
 
-        this.truckAngle -= angle;
-    }
+    /**
+     * Speeding up the car, amount must be between 0 and 1
+     * Also catches if the truck has an truckangle of more than 0
+     */
 
+    @Override
     public void gas(double amount) {
         if (amount < 0.0 || amount > 1.0) {
             throw new RuntimeException("The gas can't go above 1 nor below 0");

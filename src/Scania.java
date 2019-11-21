@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class Scania extends Car {
+public class Scania extends Truck {
 
     public Scania() {
         nrDoors = 2;
@@ -18,6 +18,37 @@ public class Scania extends Car {
     @Override
     public double speedFactor() {
         return enginePower;
+    }
+
+    /**
+     * A method for raising the truckbed on Scania
+     *
+     * @param angle
+     */
+
+    @Override
+    public void raiseTruckBed(double angle) {
+        if (this.currentSpeed > 0 || (this.truckAngle + angle) > 70 || (this.truckAngle + angle) < 0) {
+            throw new RuntimeException("Cannot raise truckbed when truck is moving!");
+        }
+
+        this.truckAngle += angle;
+
+    }
+
+    /**
+     * A method for lowering the truckbed on Scania
+     *
+     * @param angle
+     */
+
+    @Override
+    public void lowerTruckBed(double angle) {
+        if (this.currentSpeed > 0 || (this.truckAngle - angle) > 70 || (this.truckAngle - angle) < 0) {
+            throw new RuntimeException("Cannot lower truckbed when truck is moving!");
+        }
+
+        this.truckAngle -= angle;
     }
 
 }
