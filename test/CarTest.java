@@ -10,7 +10,7 @@ public class CarTest {
         Volvo240 myCar = new Volvo240();
         myCar.incrementSpeed(1);
         myCar.getCurrentSpeed();
-        assertEquals(1.25, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(1.25, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test
@@ -18,7 +18,7 @@ public class CarTest {
         Saab95 myCar = new Saab95();
         myCar.incrementSpeed(1);
         myCar.getCurrentSpeed();
-        assertEquals(1.25, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(1.25, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class CarTest {
         myCar.incrementSpeed(1);
         myCar.decrementSpeed(1);
         myCar.getCurrentSpeed();
-        assertEquals(0.0, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(0.0, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class CarTest {
         myCar.incrementSpeed(1);
         myCar.decrementSpeed(1);
         myCar.getCurrentSpeed();
-        assertEquals(0.0, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(0.0, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class CarTest {
         Volvo240 myCar = new Volvo240();
         myCar.gas(1);
         myCar.getCurrentSpeed();
-        assertEquals(1.25, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(1.25, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class CarTest {
         Saab95 myCar = new Saab95();
         myCar.gas(1);
         myCar.getCurrentSpeed();
-        assertEquals(1.25, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(1.25, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class CarTest {
         myCar.gas(1);
         myCar.brake(1);
         myCar.getCurrentSpeed();
-        assertEquals(0.0, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(0.0, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test
@@ -70,7 +70,7 @@ public class CarTest {
         myCar.gas(1);
         myCar.brake(1);
         myCar.getCurrentSpeed();
-        assertEquals(0.0, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(0.0, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test(expected = RuntimeException.class)
@@ -112,8 +112,8 @@ public class CarTest {
         myCar.startEngine();
         myCar.move();
         assertEquals(myCar.getDirection(), 'N');
-        assertEquals(myCar.point.getX(), 0, 00001);
-        assertEquals(myCar.point.getX(), 1, 00001);
+        assertEquals(myCar.point.getX(), 0.0, 0.000001);
+        assertEquals(myCar.point.getY(), 0.1, 0.000001);
     }
 
     @Test
@@ -141,8 +141,8 @@ public class CarTest {
         myCar.startEngine();
         myCar.move();
         assertEquals(myCar.getDirection(), 'N');
-        assertEquals(myCar.point.getX(), 0, 00001);
-        assertEquals(myCar.point.getX(), 1, 00001);
+        assertEquals(myCar.point.getX(), 0.0, 0.000001);
+        assertEquals(myCar.point.getY(), 0.1, 0.000001);
     }
 
     @Test

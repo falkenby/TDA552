@@ -10,21 +10,28 @@ public abstract class Transport implements Movable {
     protected String modelName; // The car model name
     protected Point2D.Double point; // Coordinate system in a 2D coordinate system
     protected char direction; // direction of the turning
-    protected boolean ramp; // boolean if the truck is moving or not
     protected double truckAngle; // truck angle
+    protected Truck.StateEngine state;
+    protected Truck.StateRamp stateRamp;
+
+    public enum StateEngine{
+        STOPPED,
+        STARTED,
+        TRANSPORTING;
+    }
 
     /* Getters and Setters*/
 
     public int getNrDoors() {
-        return nrDoors;
+        return this.nrDoors;
     }
 
     public double getEnginePower() {
-        return enginePower;
+        return this.enginePower;
     }
 
     public double getCurrentSpeed() {
-        return currentSpeed;
+        return this.currentSpeed;
     }
 
     public Color getColor() {
@@ -36,11 +43,13 @@ public abstract class Transport implements Movable {
     }
 
     public void startEngine() {
-        currentSpeed = 0.1;
+        this.currentSpeed = 0.1;
+        this.state = StateEngine.STARTED;
     }
 
     public void stopEngine() {
-        currentSpeed = 0;
+        this.currentSpeed = 0;
+        this.state = StateEngine.STOPPED;
     }
 
     public Point2D.Double getPoint() {
@@ -100,6 +109,10 @@ public abstract class Transport implements Movable {
 
     @Override
     public void move() {
+
+        if(this.state == StateEngine.TRANSPORTING){
+            throw new RuntimeException("Cannot move car when its transporting");
+        }
 
         switch (this.direction) {
             case 'N':

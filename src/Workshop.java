@@ -1,58 +1,104 @@
-import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
-public class Workshop {
+public class Workshop implements Storage {
 
-    private double storageMax;
-    private ArrayList<Car> cars;
-    private Point2D.Double carsPosition;
+    private int storageMax; // Storage max of the workshop
+    private ArrayList<Car> cars; // An array for the cars to be in
+    private Type carType; // To make it easier for the workshop to identify the different cars
 
     /**
-     * Creates a new arraylist for the cars
+     * A constructor to initialize the workshop
+     * @param storageMax
+     * @param carType
      */
-    public Workshop(int carMax) {
-        storageMax = carMax;
-        this.cars = new ArrayList<Car>(carMax);
+    public Workshop(int storageMax, Type carType) {
+
+        this.storageMax = storageMax;
+        this.cars = new ArrayList<Car>(storageMax);
+        this.carType = carType;
     }
 
     /**
-     * Returns the current position of the cars,
-     * for the CarTruck class to use
-     *
-     * @return
+     * An enum method for the different cars
      */
-    public Point2D.Double getCarsPosition() {
-        return carsPosition;
+    public enum Type {
+        VOLVO,
+        SAAB,
+        ALL;
     }
 
-    public void addCar(Car c){
-        if(cars.size() == (storageMax-1){
+    /* Getter for the car */
+    public Car getCarInfo(Car c){
+        return c;
+    }
+
+    /**
+     * A method for adding a car to the storage
+     * It checks if the is storage available
+     * A switch is used to make sure the right car goes to the right storage
+     * @param c
+     */
+    @Override
+    public void addCar(Car c) {
+
+        if (cars.size() == (storageMax - 1)) {
             throw new RuntimeException("There isn't any room!!");
         }
-        cars.add(c);
+
+        switch (this.carType) {
+            case ALL:
+                cars.add(c);
+                c.stopEngine();
+                c.state = Transport.StateEngine.TRANSPORTING;
+                break;
+            case SAAB:
+                if (c.type != Type.SAAB) {
+                    throw new RuntimeException("Sorry! This workshop only accepts SAAB cars!");
+                }
+                cars.add(c);
+                c.stopEngine();
+                c.state = Transport.StateEngine.TRANSPORTING;
+                break;
+            case VOLVO:
+                if (c.type != Type.VOLVO) {
+                    throw new RuntimeException("Sorry! This workshop only accepts VOLVO cars!");
+                }
+                cars.add(c);
+                c.stopEngine();
+                c.state = Transport.StateEngine.TRANSPORTING;
+                break;
+        }
+
     }
 
-    public void unloadTruck(){
+    /**
+     * Checks out a car and then returns the information of said car in full detail
+     * @param index
+     * @return
+     */
+    public Car checkOutCar(int index) {
+
+        Car carTemp = getCarInfo(cars.get(index));
+        cars.remove(index);
+        return carTemp;
 
     }
 
-    public void checkOutCar(int index){
-        
-
-    }
-
+    /**
+     * Sets the cars position to the same as the workshop
+     * @param point
+     */
+    @Override
     public void setCarsPosition(Point2D.Double point) {
-        this.carsPosition = point;
 
         for (Car c : getCars()) {
-            c.setCarsPosition(point);
+            c.point.setLocation(point);
         }
     }
 
-    public ArrayList<Car> getCars(){
+    /* Just a getter for the cars */
+    public ArrayList<Car> getCars() {
         return cars;
     }
-
-
 }

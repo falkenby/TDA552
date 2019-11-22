@@ -16,6 +16,8 @@ public class Saab95 extends Car {
         stopEngine();
         point = new Point2D.Double(0, 0);
         direction = 'N';
+        state = StateEngine.STOPPED;
+        type = Workshop.Type.SAAB;
     }
 
     @Override

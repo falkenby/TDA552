@@ -16,6 +16,8 @@ public class Volvo240 extends Car {
         trimFactor = 1.25;
         point = new Point2D.Double(0, 0);
         direction = 'N';
+        state = StateEngine.STOPPED;
+        type = Workshop.Type.VOLVO;
     }
 
     @Override

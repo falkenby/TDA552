@@ -12,6 +12,8 @@ public class Scania extends Truck {
         point = new Point2D.Double(0, 0);
         direction = 'N';
         truckAngle = 0;
+        state = StateEngine.STOPPED;
+        stateRamp = StateRamp.DOWN;
 
     }
 
@@ -28,11 +30,12 @@ public class Scania extends Truck {
 
     @Override
     public void raiseTruckBed(double angle) {
-        if (this.currentSpeed > 0 || (this.truckAngle + angle) > 70 || (this.truckAngle + angle) < 0) {
+        if (currentSpeed > 0 || (truckAngle + angle) > 70 || (truckAngle + angle) < 0) {
             throw new RuntimeException("Cannot raise truckbed when truck is moving!");
         }
 
-        this.truckAngle += angle;
+        truckAngle += angle;
+        stateRamp = StateRamp.UP;
 
     }
 
@@ -44,11 +47,12 @@ public class Scania extends Truck {
 
     @Override
     public void lowerTruckBed(double angle) {
-        if (this.currentSpeed > 0 || (this.truckAngle - angle) > 70 || (this.truckAngle - angle) < 0) {
+        if (currentSpeed > 0 || (truckAngle - angle) > 70 || (truckAngle - angle) < 0) {
             throw new RuntimeException("Cannot lower truckbed when truck is moving!");
         }
 
-        this.truckAngle -= angle;
+        truckAngle -= angle;
+        stateRamp = StateRamp.DOWN;
     }
 
 }

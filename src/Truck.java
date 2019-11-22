@@ -1,11 +1,17 @@
+
 public abstract class Truck extends Transport {
+
+    public enum StateRamp{
+        UP,
+        DOWN;
+    }
 
     public double getAngle() {
         return truckAngle;
     }
 
-    public boolean isRampDown() {
-        return ramp;
+    public StateRamp isRampDown() {
+        return this.stateRamp;
     }
 
     /**
@@ -33,10 +39,13 @@ public abstract class Truck extends Transport {
         if (amount < 0.0 || amount > 1.0) {
             throw new RuntimeException("The gas can't go above 1 nor below 0");
         }
-        if (this.truckAngle > 0 || ramp == false) {
+        if (this.stateRamp == StateRamp.UP) {
             throw new RuntimeException("Cannot move the truck when the truckbed is not in the down position!");
         }
         incrementSpeed(amount);
+        this.state = StateEngine.TRANSPORTING;
 
     }
+
+
 }

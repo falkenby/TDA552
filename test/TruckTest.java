@@ -4,109 +4,109 @@ import static org.junit.Assert.*;
 
 public class TruckTest {
     @Test
-    public void testVolvoSpeed() {
-        Volvo240 myCar = new Volvo240();
+    public void testScaniaSpeed() {
+        Scania myCar = new Scania();
         myCar.incrementSpeed(1);
         myCar.getCurrentSpeed();
-        assertEquals(1.25, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(0.8, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test
-    public void testSaabSpeed() {
-        Saab95 myCar = new Saab95();
+    public void testCarTruckSpeed() {
+        CarTruck myCar = new CarTruck(10);
         myCar.incrementSpeed(1);
         myCar.getCurrentSpeed();
-        assertEquals(1.25, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(0.9, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test
-    public void testVolvoDecSpeed() {
-        Volvo240 myCar = new Volvo240();
-        myCar.incrementSpeed(1);
-        myCar.decrementSpeed(1);
-        myCar.getCurrentSpeed();
-        assertEquals(0.0, myCar.getCurrentSpeed(), 0000001);
-    }
-
-    @Test
-    public void testSaabDecSpeed() {
-        Saab95 myCar = new Saab95();
+    public void testScaniaDecSpeed() {
+        Scania myCar = new Scania();
         myCar.incrementSpeed(1);
         myCar.decrementSpeed(1);
         myCar.getCurrentSpeed();
-        assertEquals(0.0, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(0.0, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test
-    public void testVolvoGas() {
-        Volvo240 myCar = new Volvo240();
+    public void testCarTruckDecSpeed() {
+        CarTruck myCar = new CarTruck(10);
+        myCar.incrementSpeed(1);
+        myCar.decrementSpeed(1);
+        myCar.getCurrentSpeed();
+        assertEquals(0.0, myCar.getCurrentSpeed(), 0.000001);
+    }
+
+    @Test
+    public void testScaniaGas() {
+        Scania myCar = new Scania();
         myCar.gas(1);
         myCar.getCurrentSpeed();
-        assertEquals(1.25, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(0.8, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test
-    public void testSaabGas() {
-        Saab95 myCar = new Saab95();
+    public void testCarTruckGas() {
+        CarTruck myCar = new CarTruck(10);
         myCar.gas(1);
         myCar.getCurrentSpeed();
-        assertEquals(1.25, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(0.9, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test
-    public void testSaabBrake() {
-        Saab95 myCar = new Saab95();
+    public void testCarTruckBrake() {
+        CarTruck myCar = new CarTruck(10);
         myCar.gas(1);
         myCar.brake(1);
         myCar.getCurrentSpeed();
-        assertEquals(0.0, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(0.0, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test
-    public void testVolvoBrake() {
-        Volvo240 myCar = new Volvo240();
+    public void testScaniaBrake() {
+        Scania myCar = new Scania();
         myCar.gas(1);
         myCar.brake(1);
         myCar.getCurrentSpeed();
-        assertEquals(0.0, myCar.getCurrentSpeed(), 0000001);
+        assertEquals(0.0, myCar.getCurrentSpeed(), 0.000001);
     }
 
     @Test(expected = RuntimeException.class)
-    public void testVolvoBrakeError() {
+    public void testScaniaBrakeError() {
 
-        Volvo240 myCar = new Volvo240();
+        Scania myCar = new Scania();
         myCar.gas(1);
         myCar.brake(2);
     }
 
     @Test(expected = RuntimeException.class)
-    public void testSaabBrakeError() {
+    public void testCarTruckBrakeError() {
 
-        Saab95 myCar = new Saab95();
+        CarTruck myCar = new CarTruck(10);
         myCar.gas(1);
         myCar.brake(2);
     }
 
     @Test(expected = RuntimeException.class)
-    public void testVolvoGasError() {
+    public void testScaniaGasError() {
 
-        Volvo240 myCar = new Volvo240();
+        Scania myCar = new Scania();
         myCar.gas(1);
         myCar.brake(2);
     }
 
     @Test(expected = RuntimeException.class)
-    public void testSaabGasError() {
+    public void testCarTruckGasError() {
 
-        Saab95 myCar = new Saab95();
+        CarTruck myCar = new CarTruck(10);
         myCar.gas(1);
         myCar.brake(2);
     }
 
     @Test
-    public void testVolvoMove() {
+    public void testScaniaMove() {
 
-        Volvo240 myCar = new Volvo240();
+        Scania myCar = new Scania();
         myCar.startEngine();
         myCar.move();
         assertEquals(myCar.getDirection(), 'N');
@@ -115,27 +115,27 @@ public class TruckTest {
     }
 
     @Test
-    public void testVolvoTurnLeft() {
+    public void testScaniaTurnLeft() {
 
-        Volvo240 myCar = new Volvo240();
+        Scania myCar = new Scania();
         myCar.startEngine();
         myCar.turnLeft();
         assertEquals(myCar.getDirection(), 'W');
     }
 
     @Test
-    public void testVolvoTurnRight() {
+    public void testScaniaTurnRight() {
 
-        Volvo240 myCar = new Volvo240();
+        Scania myCar = new Scania();
         myCar.startEngine();
         myCar.turnRight();
         assertEquals(myCar.getDirection(), 'E');
     }
 
     @Test
-    public void testSaabMove() {
+    public void testCarTruckMove() {
 
-        Saab95 myCar = new Saab95();
+        CarTruck myCar = new CarTruck(10);
         myCar.startEngine();
         myCar.move();
         assertEquals(myCar.getDirection(), 'N');
@@ -144,18 +144,18 @@ public class TruckTest {
     }
 
     @Test
-    public void testSaabTurnLeft() {
+    public void testCarTruckTurnLeft() {
 
-        Saab95 myCar = new Saab95();
+        CarTruck myCar = new CarTruck(10);
         myCar.startEngine();
         myCar.turnLeft();
         assertEquals(myCar.getDirection(), 'W');
     }
 
     @Test
-    public void testSaabTurnRight() {
+    public void testCarTruckTurnRight() {
 
-        Saab95 myCar = new Saab95();
+        CarTruck myCar = new CarTruck(10);
         myCar.startEngine();
         myCar.turnRight();
         assertEquals(myCar.getDirection(), 'E');
