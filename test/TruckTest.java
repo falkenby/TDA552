@@ -143,6 +143,15 @@ public class TruckTest {
         assertEquals(myCar.point.getX(), 1, 00001);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void testCarTruckMoveError() {
+
+        CarTruck myCar = new CarTruck(10);
+        myCar.startEngine();
+        myCar.raiseTruckBed(40);
+        myCar.move();
+    }
+
     @Test
     public void testCarTruckTurnLeft() {
 

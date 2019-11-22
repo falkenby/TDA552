@@ -12,7 +12,7 @@ public abstract class Transport implements Movable {
     protected char direction; // direction of the turning
     protected double truckAngle; // truck angle
     protected Truck.StateEngine state;
-    protected Truck.StateRamp stateRamp;
+
 
     public enum StateEngine{
         STOPPED,
