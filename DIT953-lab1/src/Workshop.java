@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Workshop implements Storage {
 
     private int storageMax; // Storage max of the workshop
-    protected ArrayList<Car> cars; // An array for the cars to be in
+    private ArrayList<Car> cars; // An array for the cars to be in
     private Type carType; // To make it easier for the workshop to identify the different cars
 
     /**
@@ -89,8 +89,8 @@ public class Workshop implements Storage {
      * Sets the cars position to the same as the workshop
      * @param point
      */
-
-    private void setCarsPosition(Point2D.Double point) {
+    @Override
+    public void setCarsPosition(Point2D.Double point) {
 
         for (Car c : getCars()) {
             c.point.setLocation(point);
