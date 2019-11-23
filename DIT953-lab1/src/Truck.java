@@ -1,6 +1,8 @@
 
 public abstract class Truck extends Transport {
 
+    protected StateRamp stateRamp;
+
     public enum StateRamp{
         UP,
         DOWN;
@@ -44,6 +46,7 @@ public abstract class Truck extends Transport {
         }
         incrementSpeed(amount);
         this.state = StateEngine.TRANSPORTING;
+
 
     }
 

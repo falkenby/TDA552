@@ -122,11 +122,17 @@ public class CarTruck extends Truck implements Storage {
      *
      * @param point
      */
-    public void setCarsPosition(Point2D.Double point) {
+    private void setCarsPosition(Point2D.Double point) {
 
         for (Car c : getCars()) {
             c.point.setLocation(point);
         }
+    }
+
+    @Override
+    public void move(){
+        super.move();
+        setCarsPosition(point);
     }
 
     /* Just a getter for the cars */
